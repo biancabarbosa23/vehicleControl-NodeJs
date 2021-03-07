@@ -1,18 +1,17 @@
-
-exports.up = knex => knex.schema.createTable('student', (table) => {
+exports.up = (knex) =>
+  knex.schema.createTable('Alunos', (table) => {
     table.increments('id').primary()
-    table.string('name').notNullable()
-    table.string('cpf').notNullable()
-    table.string('email').unique().notNullable()
-    table.string('course').notNullable()
-    table.string('period').notNullable()
-    table.string('semester').notNullable()
-    table.string('password').notNullable()
-    table.integer('level').notNullable()
-    table.string('passwordResetToken')
-    table.dateTime('passwordResetExpires')
+    table.string('nome', 100).notNullable()
+    table.string('cpf', 11).unique().notNullable()
+    table.string('email', 100).unique().notNullable()
+    table.string('curso', 50).notNullable()
+    table.string('periodo', 5).notNullable()
+    table.string('semestre', 10).notNullable()
+    table.string('senha', 50).notNullable()
+    table.string('senha_reset_token')
+    table.dateTime('senha_reset_expira')
 
-    table.timestamp('created_at').defaultTo(knex.fn.now())
-})
+    table.timestamp('criado_em').defaultTo(knex.fn.now())
+  })
 
-exports.down = knex => knex.schema.dropTable('student')
+exports.down = (knex) => knex.schema.dropTable('Alunos')

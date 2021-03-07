@@ -1,8 +1,12 @@
+exports.up = (knex) =>
+  knex.schema.createTable('Veiculos', (table) => {
+    table.string('placa', 7).unique().notNullable().primary()
+    table.string('marca', 30).notNullable()
+    table.string('cor', 30).notNullable()
+    table.string('modelo', 50).notNullable()
+    table.string('tipo', 15).notNullable()
 
-exports.up = function(knex) {
-  
-};
+    table.timestamp('criado_em').defaultTo(knex.fn.now())
+  })
 
-exports.down = function(knex) {
-  
-};
+exports.down = (knex) => knex.schema.dropTable('Veiculos')

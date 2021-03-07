@@ -1,13 +1,10 @@
-
-exports.up = knex => knex.schema.createTable('admin', (table) => {
+exports.up = (knex) =>
+  knex.schema.createTable('Administrador', (table) => {
     table.increments('id').primary()
-    table.string('email').unique().notNullable()
-    table.string('password').notNullable()
-    table.integer('level').notNullable()
-    table.string('passwordResetToken')
-    table.dateTime('passwordResetExpires')
+    table.string('email', 100).unique().notNullable()
+    table.string('senha', 50).notNullable()
+    table.string('senha_reset_token')
+    table.dateTime('senha_reset_expira')
+  })
 
-    table.timestamp('created_at').defaultTo(knex.fn.now())
-})
-
-exports.down = knex => knex.schema.dropTable('admin')
+exports.down = (knex) => knex.schema.dropTable('Administrador')
