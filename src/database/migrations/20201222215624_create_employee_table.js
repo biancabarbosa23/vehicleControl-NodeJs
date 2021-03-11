@@ -5,7 +5,7 @@ exports.up = (knex) =>
     table.string('cpf', 11).unique().notNullable()
     table.string('email', 100).unique().notNullable()
     table.string('funcao', 50).notNullable()
-    table.string('senha', 50).notNullable()
+    table.string('senha', 255).notNullable()
     table.string('senha_reset_token')
     table.dateTime('senha_reset_expira')
 

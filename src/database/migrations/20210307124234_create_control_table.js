@@ -4,6 +4,7 @@ exports.up = (knex) =>
     table
       .integer('id_prop_veiculo')
       .notNullable()
+      .unsigned()
       .references('id')
       .inTable('Proprietario_veiculo')
     table.dateTime('entrada')

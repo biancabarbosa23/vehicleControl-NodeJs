@@ -7,7 +7,7 @@ exports.up = (knex) =>
     table.string('curso', 50).notNullable()
     table.string('periodo', 5).notNullable()
     table.string('semestre', 10).notNullable()
-    table.string('senha', 50).notNullable()
+    table.string('senha', 225).notNullable()
     table.string('senha_reset_token')
     table.dateTime('senha_reset_expira')
 
