@@ -65,7 +65,7 @@ module.exports = {
           .update({ senha_reset_token: token, senha_reset_expira: now })
           .where('email', email)
 
-      const resetPasswordUrl = `${process.env.FRONT_URL}/reset/${token}`
+      const resetPasswordUrl = `${process.env.FRONT_URL}/${type}/reset/${token}`
       const name = user[0].nome
 
       mailer.sendMail(
@@ -108,7 +108,7 @@ module.exports = {
       if (user.length === 0)
         return res.json({ error: 'Token para alteração de senha inválido' })
 
-      if (user[0].password_reset_expires < new Date())
+      if (user[0].senha_reset_expira < new Date())
         return res.json({
           error: 'Token não é mais válido! Solicite outro link',
         })

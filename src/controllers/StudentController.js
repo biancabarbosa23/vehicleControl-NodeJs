@@ -48,4 +48,30 @@ module.exports = {
       return res.json({ error: 'Usuário não pode ser cadastrado' })
     }
   },
+  async getStudent(req, res) {
+    try {
+      const { id } = req.params
+
+      const aluno = await knex('Alunos')
+        .select('nome', 'cpf', 'email', 'curso', 'periodo', 'semestre')
+        .where('id', id)
+
+      return res.json({ student: aluno[0] })
+    } catch (err) {
+      return res.json({ error: 'Usuário não pode ser listado' })
+    }
+  },
+  async update(req, res) {
+    try {
+      const { id } = req.params
+      const newData = req.body
+
+      await knex('Alunos').update(newData).where('id', id)
+
+      return res.json({ success: 'Dados alterados com sucesso.' })
+    } catch (err) {
+      console.log(err)
+      return res.json({ error: 'Usuário não pode ser cadastrado' })
+    }
+  },
 }

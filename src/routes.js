@@ -17,12 +17,14 @@ routes.get('/user/authenticated', AuthController.isAuthenticated)
 
 const StudentController = require('./controllers/StudentController')
 
-routes.post('/aluno/register', StudentController.create)
+routes.post('/student/register', StudentController.create)
+routes.get('/student/:id', StudentController.getStudent)
+routes.put('/student/:id', StudentController.update)
 
 // Rotas de Gestores
 
 const EmployeeController = require('./controllers/EmployeeController')
 
-routes.post('/gestor/register', EmployeeController.create)
+routes.post('/employee/register', EmployeeController.create)
 
 module.exports = routes
