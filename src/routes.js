@@ -2,7 +2,7 @@ const express = require('express')
 const routes = express.Router()
 const path = require('path')
 
-//const authMiddleware = require('./middleware/auth')
+const authMiddleware = require('./middleware/auth')
 
 // Rotas de Autenticação
 
@@ -17,14 +17,25 @@ routes.get('/user/authenticated', AuthController.isAuthenticated)
 
 const StudentController = require('./controllers/StudentController')
 
-routes.post('/student/register', StudentController.create)
-routes.get('/student/:id', StudentController.getStudent)
-routes.put('/student/:id', StudentController.update)
+routes.post('/student', StudentController.create)
+routes.get('/student/:id', authMiddleware, StudentController.getStudent)
+routes.put('/student/:id', authMiddleware, StudentController.update)
 
 // Rotas de Gestores
 
 const EmployeeController = require('./controllers/EmployeeController')
 
-routes.post('/employee/register', EmployeeController.create)
+routes.post('/employee', EmployeeController.create)
+routes.get('/employee/:id', authMiddleware, EmployeeController.getEmployee)
+routes.put('/employee/:id', authMiddleware, EmployeeController.update)
+
+// Rotas de Veículos
+
+const VehicleController = require('./controllers/VehicleController')
+
+routes.post('/vehicle/:id', authMiddleware, VehicleController.createVehicle)
+routes.get('/vehicles/:id', VehicleController.getVehicles)
+routes.put('/vehicle/:id', authMiddleware, VehicleController.updateVehicle)
+routes.delete('/vehicle/:id', authMiddleware, VehicleController.destroy)
 
 module.exports = routes

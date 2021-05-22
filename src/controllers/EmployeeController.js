@@ -34,11 +34,38 @@ module.exports = {
       dataUser.senha = undefined
 
       return res.json({
-        user: dataUser,
-        token: jwt.sign({ id: userId[0] }, hash.secret, {
+        user: { ...dataUser, id: userId[0] },
+        token: jwt.sign({ id: userId[0], level: 2 }, hash.secret, {
           expiresIn: '12h',
         }),
       })
+    } catch (err) {
+      console.log(err)
+      return res.json({ error: 'Usuário não pode ser cadastrado' })
+    }
+  },
+  async getEmployee(req, res) {
+    try {
+      const { id } = req.params
+
+      const employee = await knex('Gestores')
+        .select('nome', 'cpf', 'email', 'funcao')
+        .where('id', id)
+
+      return res.json({ employee: employee[0] })
+    } catch (err) {
+      console.log(err)
+      return res.json({ error: 'Usuário não pode ser listado' })
+    }
+  },
+  async update(req, res) {
+    try {
+      const { id } = req.params
+      const newData = req.body
+
+      await knex('Gestores').update(newData).where('id', id)
+
+      return res.json({ success: 'Dados alterados com sucesso.' })
     } catch (err) {
       console.log(err)
       return res.json({ error: 'Usuário não pode ser cadastrado' })

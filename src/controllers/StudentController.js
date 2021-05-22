@@ -38,8 +38,8 @@ module.exports = {
       dataUser.senha = undefined
 
       return res.json({
-        user: dataUser,
-        token: jwt.sign({ id: userId[0] }, hash.secret, {
+        user: { ...dataUser, id: userId[0] },
+        token: jwt.sign({ id: userId[0], level: 1 }, hash.secret, {
           expiresIn: '12h',
         }),
       })

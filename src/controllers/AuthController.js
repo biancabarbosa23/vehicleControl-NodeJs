@@ -29,9 +29,13 @@ module.exports = {
 
       return res.json({
         user: user[0],
-        token: jwt.sign({ id: user[0].id }, hash.secret, {
-          expiresIn: '12h',
-        }),
+        token: jwt.sign(
+          { id: user[0].id, level: type === 'aluno' ? 1 : 2 },
+          hash.secret,
+          {
+            expiresIn: '12h',
+          }
+        ),
       })
     } catch (err) {
       console.log(err)
