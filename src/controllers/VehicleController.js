@@ -46,7 +46,7 @@ module.exports = {
   },
   async getVehicles(req, res) {
     try {
-      const { id } = req.params
+      const id = req.id
 
       const vehicles = await knex('Veiculos AS v')
         .select(

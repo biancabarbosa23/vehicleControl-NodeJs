@@ -50,7 +50,7 @@ module.exports = {
   },
   async getStudent(req, res) {
     try {
-      const { id } = req.params
+      const id = req.id
 
       const aluno = await knex('Alunos')
         .select('nome', 'cpf', 'email', 'curso', 'periodo', 'semestre')
@@ -63,7 +63,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const { id } = req.params
+      const id = req.id
       const newData = req.body
 
       await knex('Alunos').update(newData).where('id', id)

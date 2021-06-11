@@ -9,7 +9,6 @@ module.exports = {
   async create(req, res) {
     try {
       const { nome, email, cpf, funcao, senha } = req.body
-      console.log(senha)
 
       let gestor
 
@@ -46,7 +45,7 @@ module.exports = {
   },
   async getEmployee(req, res) {
     try {
-      const { id } = req.params
+      const id = req.id
 
       const employee = await knex('Gestores')
         .select('nome', 'cpf', 'email', 'funcao')
@@ -60,7 +59,7 @@ module.exports = {
   },
   async update(req, res) {
     try {
-      const { id } = req.params
+      const id = req.id
       const newData = req.body
 
       await knex('Gestores').update(newData).where('id', id)

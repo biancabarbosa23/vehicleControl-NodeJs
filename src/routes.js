@@ -13,6 +13,15 @@ routes.post('/user/forgot-password', AuthController.forgotPassword)
 routes.post('/user/reset-password', AuthController.resetPassword)
 routes.get('/user/authenticated', AuthController.isAuthenticated)
 
+// Rotas do Administrador
+
+const AdminController = require('./controllers/AdminController')
+
+routes.post('/admin/login', AdminController.login)
+routes.post('/admin/forgot-password', AdminController.forgotPassword)
+routes.post('/admin/reset-password', AdminController.resetPassword)
+routes.get('/admin/authenticated', AdminController.isAuthenticated)
+
 // Rotas de Alunos
 
 const StudentController = require('./controllers/StudentController')
@@ -34,7 +43,7 @@ routes.put('/employee/:id', authMiddleware, EmployeeController.update)
 const VehicleController = require('./controllers/VehicleController')
 
 routes.post('/vehicle/:id', authMiddleware, VehicleController.createVehicle)
-routes.get('/vehicles/:id', VehicleController.getVehicles)
+routes.get('/vehicles/:id', authMiddleware, VehicleController.getVehicles)
 routes.put('/vehicle/:id', authMiddleware, VehicleController.updateVehicle)
 routes.delete('/vehicle/:id', authMiddleware, VehicleController.destroy)
 

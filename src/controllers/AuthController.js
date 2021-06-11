@@ -14,9 +14,9 @@ module.exports = {
 
       let user
 
-      if (type === 'aluno') {
+      if (type == 'aluno') {
         user = await knex('Alunos').select().where('email', email)
-      } else if (type === 'gestor') {
+      } else if (type == 'gestor') {
         user = await knex('Gestores').select().where('email', email)
       }
 
@@ -30,7 +30,7 @@ module.exports = {
       return res.json({
         user: user[0],
         token: jwt.sign(
-          { id: user[0].id, level: type === 'aluno' ? 1 : 2 },
+          { id: user[0].id, level: type == 'aluno' ? 1 : 2 },
           hash.secret,
           {
             expiresIn: '12h',
@@ -75,7 +75,7 @@ module.exports = {
       mailer.sendMail(
         {
           to: email,
-          from: 'onlyfortest@tisorocaba.com.br',
+          from: 'veiculos@fatecitu.com.br',
           subject: 'Recuperação de senha',
           template: 'forgotPassword',
           context: { resetPasswordUrl, name },
@@ -90,6 +90,7 @@ module.exports = {
         }
       )
     } catch (err) {
+      console.log(err)
       return res.json({ error: 'Erro ao tentar recuperar senha!' })
     }
   },
