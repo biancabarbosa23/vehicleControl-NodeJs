@@ -26,6 +26,7 @@ module.exports = {
         }),
       })
     } catch (err) {
+      console.log(err)
       return res.json({ error: 'Administrador não encontrado!' })
     }
   },
@@ -33,6 +34,7 @@ module.exports = {
   async forgotPassword(req, res) {
     try {
       const { email } = req.body
+      console.log(email)
 
       const admin = await knex('Administrador').select().where('email', email)
 

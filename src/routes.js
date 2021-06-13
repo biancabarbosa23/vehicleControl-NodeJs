@@ -43,6 +43,8 @@ routes.put('/employee/:id', authMiddleware, EmployeeController.update)
 const VehicleController = require('./controllers/VehicleController')
 
 routes.post('/vehicle/:id', authMiddleware, VehicleController.createVehicle)
+routes.get('/control', authMiddleware, VehicleController.getControl)
+routes.get('/vehicles', authMiddleware, VehicleController.getAll)
 routes.get('/vehicles/:id', authMiddleware, VehicleController.getVehicles)
 routes.put('/vehicle/:id', authMiddleware, VehicleController.updateVehicle)
 routes.delete('/vehicle/:id', authMiddleware, VehicleController.destroy)
